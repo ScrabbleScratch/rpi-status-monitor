@@ -14,7 +14,7 @@ While the "I2C_LCD_driver.py" script is the module needed to take control of the
 
 In the LCD driver script it's needed to specify the memory address that the I2C module is pointed to. You can do it by running an I2C scan.
 ```
-ADDRESS=0x27    #change the 0x27 with the address of your module
+ADDRESS = 0x27    #change the 0x27 with the address of your module
 ```
 
 # Dockerfile
