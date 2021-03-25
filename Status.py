@@ -61,7 +61,15 @@ while True:
     tram = round(psutil.virtual_memory()[3]*(10**-9), 1)                    #get ram percent converted from byte to gigabyte
     ttemp = round(psutil.sensors_temperatures()["cpu_thermal"][0][1], 1)    #get cpu temperature
     tip = socket.gethostbyname(socket.gethostname())                        #get ip address
-    tfan = "ON" if ttemp >= on_temp else "OFF"
-    gpio.output(17, True if tfan == "ON" else False)
+    if fan:
+        if ttemp >= on_temp:
+            gpio.output(17, True)
+            tfan = "ON"
+        elif ttemp <= off_temp:
+            gpio.output(17, False)
+            tfan = "OFF"
+    else:
+        gpio.output(17, False)
+        tfan = "OFF"
     refresh(tcpu, tram, ttemp, tfan, tip)
     sleep(5)
