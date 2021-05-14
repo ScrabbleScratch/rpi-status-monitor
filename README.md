@@ -7,10 +7,14 @@ A dockerized python script that's monitoring system parameters such as:
 
 It displays each of them in an _LCD_ controlled via _I2C_ communication.
 
-The python script named "Status.py" contains the set of instructions needed to monitor the system statistics.
-While the "I2C_LCD_driver.py" script is the module needed to take control of the I2C LCD attached to the Raspberry.
+The python script named "status-monitor.py" contains the set of instructions needed to monitor the system statistics.
+While the "I2C_LCD_driver_UBUNTU.py" script is the module needed to take control of the I2C LCD attached to the Raspberry.
 
-# I2C_LCD_driver.py
+# _ADDED:_
+ - _It now has support to take control over a 4 channel relay module._
+ - _A control for a fan was added, including it's temperature control._
+
+# I2C_LCD_driver_UBUNTU.py
 
 In the LCD driver script it's needed to specify the memory address that the I2C module is pointed to. You can do it by running an I2C scan.
 ```
