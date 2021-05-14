@@ -1,11 +1,10 @@
-from python:3
+FROM python:3
 
-ADD I2C_LCD_driver.py /
-ADD Status.py /
+ADD status-monitor.py /
+ADD I2C_LCD_driver_UBUNTU.py /
 
 RUN pip install smbus2
 RUN pip install RPi.GPIO
 RUN pip install psutil
 
-CMD ["python", "./Status.py"]
-
+CMD ["python", "./status-monitor.py"]
