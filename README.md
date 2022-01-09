@@ -10,6 +10,12 @@ It displays each of them in an _LCD_ controlled via _I2C_ communication.
 The python script named "status-monitor.py" contains the set of instructions needed to monitor the system statistics.
 While the "I2C_LCD_driver_UBUNTU.py" script is the module needed to take control of the I2C LCD attached to the Raspberry.
 
+# IMPORTANT
+In order to get the script o work, `i2c-tools` has to be installed before using:
+```
+sudo apt install i2c-tools
+```
+
 # _ADDED:_
  - _It now has support to take control over a 4 channel relay module._
  - _A control for a fan was added, including it's temperature control._
