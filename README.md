@@ -38,5 +38,5 @@ The Dockerfile contains the configuration for a minimal dockerization of the pyt
 # Specs of the system where the project is tested:
 
 - **Board:** Raspberry Pi 4B
-- **OS:** Ubuntu Server 20.04.2 arm64
+- **OS:** Ubuntu Server 20.04.3 arm64
 - **Python:** Latest image of Python for docker ARM64
