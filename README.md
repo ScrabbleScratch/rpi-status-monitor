@@ -11,9 +11,13 @@ The python script named "status-monitor.py" contains the set of instructions nee
 While the "I2C_LCD_driver_UBUNTU.py" script is the module needed to take control of the I2C LCD attached to the Raspberry.
 
 # IMPORTANT
-In order to get the script o work, `i2c-tools` has to be installed before using:
+- In order to get the script o work, `i2c-tools` has to be installed before using:
 ```
 sudo apt install i2c-tools
+```
+- Due to some issues when installing the `RPi.GPIO` module in the container, the _Dockerfile_ has been modified to install it with the line:
+```
+RUN CFLAGS="-fcommon" pip install RPi.GPIO
 ```
 
 # _ADDED:_
