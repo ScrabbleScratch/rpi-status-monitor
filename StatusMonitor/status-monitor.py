@@ -2,7 +2,16 @@ import I2C_LCD_driver_UBUNTU as driver     #modified script to work on Ubuntu
 import RPi.GPIO as gpio             #to take control of the gpio pins
 import socket                       #to get ip address
 import psutil                       #to read system stats
+import argparse                     #to read arguments parsed from console
 from time import sleep              #to ake pauses between reads
+
+parser = argparse.ArgumentParser(description="Get system info displayed on an LCD screen")
+parser.add_argument("--cooler-on", dest="cooler_on", default=50, help="Temperature at which the cooler turns on", type=int)
+parser.add_argument("--cooler-off", dest="cooler_off", default=40, help="Temperature at which the cooler turns off", type=int)
+parser.add_argument("--fan-on", dest="fan_on", default=55, help="Temperature at which the fan turns on", type=int)
+parser.add_argument("--fan-off", dest="fan_off", default=50, help="Temperature at which the fan turns off", type=int)
+parser.add_argument("-d", "--delay", dest="delay", default=5, help="Delay between each read cycle", type=float)
+args = parser.parse_args()
 
 lcd = driver.lcd()
 
@@ -23,10 +32,23 @@ gpio.setup(relay3_pin, gpio.OUT)
 gpio.setup(fan_pin, gpio.OUT)
 
 #define temperatures to turn cooler and fan on/off
-cooler_on = 50
-cooler_off = 40
-fan_on =55
-fan_off =50
+cooler_on = args.cooler_on
+cooler_off = args.cooler_off
+fan_on = args.fan_on
+fan_off = args.fan_off
+
+#seconds between cycles
+cycle = args.delay
+
+#get the hostname
+hostname = socket.gethostname()
+
+print(f"""
+COOLER TEMPS: {cooler_off} - {cooler_on}
+FAN TEMPS: {fan_off} - {fan_on}
+CYCLE DELAY: {cycle}
+
+""")
 
 #variables to save last states read
 cpu = None
@@ -35,12 +57,6 @@ temp = None
 cooler = None
 fan = None
 ip = None
-
-#seconds between cycles
-cycle = 5
-
-#get the hostname
-hostname = socket.gethostname()
 
 #lcd control
 def refresh(tcpu=0, tram=0, ttemp=0, tcooler="", tfan="", tip=""):
